@@ -1,0 +1,20 @@
+h2 {
+  margin-bottom: 20px;
+}
+.container {
+  max-width: 500px;
+  margin: 20px auto;
+}
+.form_control {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.form_control label {
+  margin-bottom: 10px;
+}
+.form_control input {
+  padding: 0.7em;
+  border-radius: 3;
+}
