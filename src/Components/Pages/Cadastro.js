@@ -19,25 +19,25 @@ function Cadastro() {
   const valorInput = (e) =>
     setCliente({ ...cliente, [e.target.name]: e.target.value });
 
-  const criarCLiente = async (e) => {
+  function criarCliente(e) {
     e.preventDefault();
     console.log(cliente);
-    fetch("http://localhost:3500/cliente", {
+    fetch("https://localhost:3500/cliente/", {
       method: "POST",
       headers: {
-        "content-type": "application/json",
+        "Content-type": "application/json",
       },
       body: JSON.stringify({ cliente }),
     })
       .then((resp) => resp.json())
       .then((data) => console.log(data))
       .catch((err) => console.log(err));
-  };
+  }
 
   return (
     <div className={styles.container}>
       <h2>Cadastro de clientes</h2>
-      <form onSubmit={criarCLiente}>
+      <form onSubmit={criarCliente}>
         <div className={styles.form_control}>
           <label>nome</label>
           <input

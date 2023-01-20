@@ -1,4 +1,4 @@
 function Consulta() {
-  return <h1>Consulta</h1>;
+  return <h1>Consuta</h1>;
 }
 export default Consulta;
