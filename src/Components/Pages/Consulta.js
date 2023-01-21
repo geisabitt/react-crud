@@ -15,19 +15,9 @@ function Consulta() {
       .catch((error) => console.log("error", error));
   }, []);
 
-  function apagarPessoa(id) {
-    let requestOptions = {
-      method: "DELETE",
-      body: JSON.stringify(),
-    };
-
-    console.log(id);
-    fetch("/cliente/" + id, requestOptions)
-      .then((response) => response.json())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
-  }
-
+  const [deletePessoa, setDeletePessoa] = useState({
+    method: "DELETE",
+  });
   return (
     <div className="conteudo">
       <div className="mensagem"></div>
@@ -59,7 +49,9 @@ function Consulta() {
                 <td>
                   <Link to={"/visualizar/" + cliente._id}>Ver</Link>{" "}
                   <Link to={"/editar/" + cliente._id}>Editar</Link>
-                  <button onClick={apagarPessoa(cliente._id)}>Deletar</button>
+                  <button onClick={() => setDeletePessoa(cliente._id)}>
+                    Deletar
+                  </button>
                 </td>
               </tr>
             );
