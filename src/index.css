@@ -11,3 +11,10 @@ body,
 #root {
   height: 100%;
 }
+.invisivel {
+  display: none;
+}
+
+.headerColuna {
+  background-color: #bbbbbb;
+}

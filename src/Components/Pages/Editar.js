@@ -1,25 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 
 import styles from './Cadastro.module.css';
 
-function Cadastro() {
-  const [cliente, setCliente] = useState({
-    nome: "",
-    sobrenome: "",
-    data_nascimento: "",
-    cpf: 0,
-    cep: 0,
-    endereco: "",
-    numero: "",
-    complemento: "",
-    cidade: "",
-    estado: "",
-  });
+function Editar() {
+  const [cliente, setCliente] = useState([]);
+  const { id } = useParams();
+  console.log(id);
+  useEffect(() => {
+    fetch(`/cliente/${id}`, {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((cliente) => {
+        console.log(cliente);
+        setCliente(cliente);
+      })
+      .catch((error) => console.log("error", error));
+  }, [id]);
 
   const valorInput = (e) =>
     setCliente({ ...cliente, [e.target.name]: e.target.value });
 
-  function Cadastro2() {
+  function Editar2() {
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -37,13 +40,13 @@ function Cadastro() {
     });
 
     let requestOptions = {
-      method: "POST",
+      method: "PATCH",
       headers: myHeaders,
       body: raw,
       redirect: "follow",
     };
 
-    fetch("/cliente", requestOptions)
+    fetch(`/cliente/${id}`, requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
@@ -66,7 +69,7 @@ function Cadastro() {
 
   return (
     <div className={styles.container}>
-      <h2>Cadastro de clientes</h2>
+      <h2>Editar de cliente</h2>
       <form onSubmit={criarCliente}>
         <div className={styles.form_control}>
           <label>nome</label>
@@ -75,6 +78,7 @@ function Cadastro() {
             type="text"
             name="nome"
             placeholder="Digite um nome"
+            value={cliente.nome}
           />
         </div>
         <div className={styles.form_control}>
@@ -84,6 +88,7 @@ function Cadastro() {
             type="text"
             name="sobrenome"
             placeholder="Digite um sobrenome"
+            value={cliente.sobrenome}
           />
         </div>
         <div className={styles.form_control}>
@@ -92,6 +97,7 @@ function Cadastro() {
             onChange={valorInput}
             type="number"
             name="cpf"
+            value={cliente.cpf}
             placeholder="Digite um cpf"
           />
         </div>
@@ -101,6 +107,7 @@ function Cadastro() {
             onChange={valorInput}
             type="date"
             name="data_nascimento"
+            value={cliente.data_nascimento}
             placeholder="Digite um data_nascimento"
           />
         </div>
@@ -110,6 +117,7 @@ function Cadastro() {
             onChange={valorInput}
             type="number"
             name="cep"
+            value={cliente.cep}
             placeholder="Digite um cep"
           />
         </div>
@@ -119,6 +127,7 @@ function Cadastro() {
             onChange={valorInput}
             type="text"
             name="endereco"
+            value={cliente.endereco}
             placeholder="Digite um endereco"
           />
         </div>
@@ -128,6 +137,7 @@ function Cadastro() {
             onChange={valorInput}
             type="text"
             name="numero"
+            value={cliente.numero}
             placeholder="Digite um numero"
           />
         </div>
@@ -137,6 +147,7 @@ function Cadastro() {
             onChange={valorInput}
             type="text"
             name="complemento"
+            value={cliente.complemento}
             placeholder="Digite um complemento"
           />
         </div>
@@ -146,6 +157,7 @@ function Cadastro() {
             onChange={valorInput}
             type="text"
             name="cidade"
+            value={cliente.cidade}
             placeholder="Digite um cidade"
           />
         </div>
@@ -155,14 +167,18 @@ function Cadastro() {
             onChange={valorInput}
             type="text"
             name="estado"
+            value={cliente.estado}
             placeholder="Digite um estado"
           />
         </div>
-        <button type="button" onClick={Cadastro2}>
-          Cadastrar
+
+        <Link to={"/consulta"}>Voltar</Link>
+
+        <button type="button" onClick={Editar2}>
+          Salvar
         </button>
       </form>
     </div>
   );
 }
-export default Cadastro;
+export default Editar;
