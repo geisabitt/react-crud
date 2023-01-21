@@ -49,25 +49,10 @@ function Cadastro() {
       .catch((error) => console.log("error", error));
   }
 
-  const criarCliente = async (e) => {
-    //e.preventDefault();
-    console.log(cliente);
-    await fetch("http://localhost:3500/cliente", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(cliente),
-    })
-      .then((resp) => resp.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
-  };
-
   return (
     <div className={styles.container}>
       <h2>Cadastro de clientes</h2>
-      <form onSubmit={criarCliente}>
+      <form>
         <div className={styles.form_control}>
           <label>nome</label>
           <input
