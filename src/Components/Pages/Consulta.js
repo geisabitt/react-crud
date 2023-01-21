@@ -15,9 +15,23 @@ function Consulta() {
       .catch((error) => console.log("error", error));
   }, []);
 
-  const [deletePessoa, setDeletePessoa] = useState({
-    method: "DELETE",
-  });
+  function removePessoa(id) {
+    fetch(`/cliente/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((resp) => resp.json())
+      .then((result) => console.log(result))
+      .then(console.log("delete Acionado"))
+
+      //  .then((data) => {
+      //  setDeletePessoa(deletePessoa.filter((cliente) => cliente.id !== id));
+      // });
+      .catch((error) => console.log("error", error));
+  }
+
   return (
     <div className="conteudo">
       <div className="mensagem"></div>
@@ -49,7 +63,10 @@ function Consulta() {
                 <td>
                   <Link to={"/visualizar/" + cliente._id}>Ver</Link>{" "}
                   <Link to={"/editar/" + cliente._id}>Editar</Link>
-                  <button onClick={() => setDeletePessoa(cliente._id)}>
+                  <button
+                    onClick={() => {
+                      removePessoa(cliente._id);
+                    }}>
                     Deletar
                   </button>
                 </td>
