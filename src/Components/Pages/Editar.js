@@ -46,9 +46,9 @@ function Editar() {
       redirect: "follow",
     };
 
-    fetch(`/cliente/${id}`, requestOptions)
+    fetch(`/api/cliente/${id}`, requestOptions)
       .then((response) => response.text())
-      .then((result) => alert.log(result))
+      .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
   }
 
