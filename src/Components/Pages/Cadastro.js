@@ -43,7 +43,7 @@ function Cadastro() {
       redirect: "follow",
     };
 
-    fetch("/cliente", requestOptions)
+    fetch("/api/cliente", requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
@@ -143,7 +143,7 @@ function Cadastro() {
             placeholder="Digite um estado"
           />
         </div>
-        <button type="button" onClick={Cadastro2}>
+        <button className="btn btn-success" type="button" onClick={Cadastro2}>
           Cadastrar
         </button>
       </form>

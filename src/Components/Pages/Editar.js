@@ -8,7 +8,7 @@ function Editar() {
   const { id } = useParams();
   console.log(id);
   useEffect(() => {
-    fetch(`/cliente/${id}`, {
+    fetch(`/api/cliente/${id}`, {
       method: "GET",
     })
       .then((response) => response.json())
@@ -48,7 +48,7 @@ function Editar() {
 
     fetch(`/cliente/${id}`, requestOptions)
       .then((response) => response.text())
-      .then((result) => console.log(result))
+      .then((result) => alert.log(result))
       .catch((error) => console.log("error", error));
   }
 
@@ -156,10 +156,10 @@ function Editar() {
             placeholder="Digite um estado"
           />
         </div>
-
-        <Link to={"/consulta"}>Voltar</Link>
-
-        <button type="button" onClick={Editar2}>
+        <Link className="btn btn-outline-primary" to={"/consulta"}>
+          Voltar
+        </Link>{" "}
+        <button className="btn btn-success" type="button" onClick={Editar2}>
           Salvar
         </button>
       </form>

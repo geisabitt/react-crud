@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Consulta() {
-  const [cliente, setCliente] = useState([]);
+  let [cliente, setCliente] = useState([]);
   useEffect(() => {
-    fetch("/cliente", {
+    fetch("/api/cliente", {
       method: "GET",
     })
       .then((response) => response.json())
@@ -16,7 +16,7 @@ function Consulta() {
   }, []);
 
   function removePessoa(id) {
-    fetch(`/cliente/${id}`, {
+    fetch(`/api/cliente/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -33,37 +33,44 @@ function Consulta() {
   }
 
   return (
-    <div className="conteudo">
+    <div className="ajust">
       <div className="mensagem"></div>
-      <table className="listarPessoas">
+      <table className="table table-striped">
         <thead>
-          <tr className="headerColuna">
-            <td className="invisivel">_id</td>
-            <td>nome</td>
-            <td>data_nascimento</td>
-            <td>cpf</td>
-            <td>endereco</td>
-            <td>Ações</td>
+          <tr>
+            <td scope="col">Nome</td>
+            <td scope="col">Data de Nascimento</td>
+            <td scope="col">CPF</td>
+            <td scope="col">Endereco</td>
+            <td scope="col">Ações</td>
           </tr>
         </thead>
         <tbody>
           {Object.values(cliente).map((cliente) => {
             return (
-              <tr key={cliente._id}>
-                <td className="invisivel">{cliente._id}</td>
+              <tr scope="row" key={cliente._id}>
                 <td>
                   {cliente.nome} {cliente.sobrenome}
                 </td>
                 <td>{cliente.data_nascimento}</td>
                 <td>{cliente.cpf}</td>
                 <td>
-                  {cliente.endereco}, {cliente.numero}, {cliente.complemento} -{" "}
-                  {cliente.cidade}/{cliente.estado} - {cliente.cep}{" "}
+                  {cliente.endereco},{cliente.numero},{cliente.complemento} -{" "}
+                  {cliente.cidade}/{cliente.estado} -{cliente.cep}{" "}
                 </td>
                 <td>
-                  <Link to={"/visualizar/" + cliente._id}>Ver</Link>{" "}
-                  <Link to={"/editar/" + cliente._id}>Editar</Link>
+                  <Link
+                    class="btn btn-outline-primary"
+                    to={"/visualizar/" + cliente._id}>
+                    Ver
+                  </Link>{" "}
+                  <Link
+                    class="btn btn-outline-primary"
+                    to={"/editar/" + cliente._id}>
+                    Editar
+                  </Link>{" "}
                   <button
+                    class="btn btn-outline-danger"
                     onClick={() => {
                       removePessoa(cliente._id);
                     }}>

@@ -6,7 +6,7 @@ function Visualizar() {
   const { id } = useParams();
   console.log(id);
   useEffect(() => {
-    fetch(`/cliente/${id}`, {
+    fetch(`/api/cliente/${id}`, {
       method: "GET",
     })
       .then((response) => response.json())
@@ -18,29 +18,62 @@ function Visualizar() {
   }, [id]);
 
   return (
-    <div>
-      <table className="listarPessoas">
+    <div className="ajust">
+      <table className="table visualizar">
         <thead>
           <tr>
-            <td className="headerColuna">Cliente:</td>
+            <th scope="col">#</th>
+            <th scope="col">Cliente</th>
           </tr>
         </thead>
         <tbody>
-          <tr key={cliente._id}>
-            <tr className="invisivel"> {cliente._id}</tr>
-            <tr>{cliente.nome}</tr>
-            <tr>{cliente.sobrenome}</tr>
-            <tr>{cliente.data_nascimento}</tr>
-            <tr>{cliente.cpf}</tr>
-            <tr>{cliente.endereco}</tr>
-            <tr>{cliente.numero}</tr>
-            <tr>{cliente.complemento}</tr>
-            <tr>{cliente.cep}</tr>
-            <tr>{cliente.cidade}</tr>
-            <tr>{cliente.estado}</tr>
-            <tr>
+          <tr className="invisivel">
+            <th key={cliente._id} scope="row">
+              Nome:{" "}
+            </th>
+            <td>{cliente._id}</td>
+          </tr>
+          <tr>
+            <th scope="row">Nome: </th>
+            <td>{cliente.nome}</td>
+          </tr>
+          <tr>
+            <th scope="row">Sobrenome: </th>
+            <td>{cliente.sobrenome}</td>
+          </tr>
+          <tr>
+            <th scope="row">CPF: </th>
+            <td>{cliente.cpf}</td>
+          </tr>
+          <tr>
+            <th scope="row">Data Nascimento: </th>
+            <td>{cliente.data_nascimento}</td>
+          </tr>
+          <tr>
+            <th scope="row">Cep: </th>
+            <td>{cliente.cep}</td>
+          </tr>
+          <tr>
+            <th scope="row">Endereco: </th>
+            <td>{cliente.endereco}</td>
+          </tr>
+          <tr>
+            <th scope="row">Complemento: </th>
+            <td>{cliente.complemento}</td>
+          </tr>
+          <tr>
+            <th scope="row">Cidade: </th>
+            <td>{cliente.cidade}</td>
+          </tr>
+          <tr>
+            <th scope="row">Estado: </th>
+            <td>{cliente.estado}</td>
+          </tr>
+          <tr>
+            <th scope="row"></th>
+            <td>
               <Link to={"/consulta"}>Voltar</Link>
-            </tr>
+            </td>
           </tr>
         </tbody>
       </table>

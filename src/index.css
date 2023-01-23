@@ -5,7 +5,12 @@
   box-sizing: border-box;
   font-family: "Ubuntu", sans-serif;
 }
-
+a {
+  text-decoration: none;
+}
+button a:hover {
+  color: #fff;
+}
 html,
 body,
 #root {
@@ -17,4 +22,12 @@ body,
 
 .headerColuna {
   background-color: #bbbbbb;
+}
+.ajust {
+  min-height: 70%;
+}
+
+.visualizar {
+  max-width: 400px;
+  margin: 20px auto;
 }
