@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Consulta() {
+  // const navigate = useNavigate();
+
   let [cliente, setCliente] = useState([]);
   useEffect(() => {
     fetch("/api/cliente", {
@@ -23,7 +25,10 @@ function Consulta() {
       },
     })
       .then((resp) => resp.json())
-      .then((result) => console.log(result))
+      .then((result) => {
+        console.log(result);
+        document.location.reload(true);
+      })
       .then(console.log("delete Acionado"))
 
       //  .then((data) => {
@@ -60,17 +65,17 @@ function Consulta() {
                 </td>
                 <td>
                   <Link
-                    class="btn btn-outline-primary"
+                    class="ver btn btn-outline-primary"
                     to={"/visualizar/" + cliente._id}>
                     Ver
                   </Link>{" "}
                   <Link
-                    class="btn btn-outline-primary"
+                    class="editar btn btn-outline-primary"
                     to={"/editar/" + cliente._id}>
                     Editar
                   </Link>{" "}
                   <button
-                    class="btn btn-outline-danger"
+                    class="deletar btn btn-outline-danger"
                     onClick={() => {
                       removePessoa(cliente._id);
                     }}>

@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './Cadastro.module.css';
 
 function Cadastro() {
+  const navigate = useNavigate();
+
   const [cliente, setCliente] = useState({
     nome: "",
     sobrenome: "",
@@ -45,7 +48,10 @@ function Cadastro() {
 
     fetch("/api/cliente", requestOptions)
       .then((response) => response.text())
-      .then((result) => console.log(result))
+      .then((result) => {
+        console.log(result);
+        navigate("/consulta");
+      })
       .catch((error) => console.log("error", error));
   }
 
@@ -59,6 +65,7 @@ function Cadastro() {
             onChange={valorInput}
             type="text"
             name="nome"
+            id="nome"
             placeholder="Digite um nome"
           />
         </div>
@@ -68,6 +75,7 @@ function Cadastro() {
             onChange={valorInput}
             type="text"
             name="sobrenome"
+            id="sobrenome"
             placeholder="Digite um sobrenome"
           />
         </div>
@@ -77,6 +85,7 @@ function Cadastro() {
             onChange={valorInput}
             type="number"
             name="cpf"
+            id="cpf"
             placeholder="Digite um cpf"
           />
         </div>
@@ -86,6 +95,7 @@ function Cadastro() {
             onChange={valorInput}
             type="date"
             name="data_nascimento"
+            id="data_nascimento"
             placeholder="Digite um data_nascimento"
           />
         </div>
@@ -95,6 +105,7 @@ function Cadastro() {
             onChange={valorInput}
             type="number"
             name="cep"
+            id="cep"
             placeholder="Digite um cep"
           />
         </div>
@@ -104,6 +115,7 @@ function Cadastro() {
             onChange={valorInput}
             type="text"
             name="endereco"
+            id="endereco"
             placeholder="Digite um endereco"
           />
         </div>
@@ -113,6 +125,7 @@ function Cadastro() {
             onChange={valorInput}
             type="text"
             name="numero"
+            id="numero"
             placeholder="Digite um numero"
           />
         </div>
@@ -122,6 +135,7 @@ function Cadastro() {
             onChange={valorInput}
             type="text"
             name="complemento"
+            id="complemento"
             placeholder="Digite um complemento"
           />
         </div>
@@ -131,6 +145,7 @@ function Cadastro() {
             onChange={valorInput}
             type="text"
             name="cidade"
+            id="cidade"
             placeholder="Digite um cidade"
           />
         </div>
@@ -140,10 +155,15 @@ function Cadastro() {
             onChange={valorInput}
             type="text"
             name="estado"
+            id="estado"
             placeholder="Digite um estado"
           />
         </div>
-        <button className="btn btn-success" type="button" onClick={Cadastro2}>
+        <button
+          id="btn-cadastrar"
+          className="btn btn-success"
+          type="button"
+          onClick={Cadastro2}>
           Cadastrar
         </button>
       </form>

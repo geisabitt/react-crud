@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import styles from './Cadastro.module.css';
 
 function Editar() {
   const [cliente, setCliente] = useState([]);
+  const navigate = useNavigate();
+
   const { id } = useParams();
   console.log(id);
   useEffect(() => {
@@ -48,7 +50,10 @@ function Editar() {
 
     fetch(`/api/cliente/${id}`, requestOptions)
       .then((response) => response.text())
-      .then((result) => console.log(result))
+      .then((result) => {
+        console.log(result);
+        navigate("/consulta");
+      })
       .catch((error) => console.log("error", error));
   }
 
@@ -62,6 +67,7 @@ function Editar() {
             onChange={valorInput}
             type="text"
             name="nome"
+            id="nome"
             placeholder="Digite um nome"
             value={cliente.nome}
           />
@@ -72,6 +78,7 @@ function Editar() {
             onChange={valorInput}
             type="text"
             name="sobrenome"
+            id="sobrenome"
             placeholder="Digite um sobrenome"
             value={cliente.sobrenome}
           />
@@ -82,6 +89,7 @@ function Editar() {
             onChange={valorInput}
             type="number"
             name="cpf"
+            id="cpf"
             value={cliente.cpf}
             placeholder="Digite um cpf"
           />
@@ -92,6 +100,7 @@ function Editar() {
             onChange={valorInput}
             type="date"
             name="data_nascimento"
+            id="data_nascimento"
             value={cliente.data_nascimento}
             placeholder="Digite um data_nascimento"
           />
@@ -102,6 +111,7 @@ function Editar() {
             onChange={valorInput}
             type="number"
             name="cep"
+            id="cep"
             value={cliente.cep}
             placeholder="Digite um cep"
           />
@@ -112,6 +122,7 @@ function Editar() {
             onChange={valorInput}
             type="text"
             name="endereco"
+            id="endereco"
             value={cliente.endereco}
             placeholder="Digite um endereco"
           />
@@ -122,6 +133,7 @@ function Editar() {
             onChange={valorInput}
             type="text"
             name="numero"
+            id="numero"
             value={cliente.numero}
             placeholder="Digite um numero"
           />
@@ -132,6 +144,7 @@ function Editar() {
             onChange={valorInput}
             type="text"
             name="complemento"
+            id="complemento"
             value={cliente.complemento}
             placeholder="Digite um complemento"
           />
@@ -142,6 +155,7 @@ function Editar() {
             onChange={valorInput}
             type="text"
             name="cidade"
+            id="cidade"
             value={cliente.cidade}
             placeholder="Digite um cidade"
           />
@@ -152,6 +166,7 @@ function Editar() {
             onChange={valorInput}
             type="text"
             name="estado"
+            id="estado"
             value={cliente.estado}
             placeholder="Digite um estado"
           />
@@ -159,7 +174,11 @@ function Editar() {
         <Link className="btn btn-outline-primary" to={"/consulta"}>
           Voltar
         </Link>{" "}
-        <button className="btn btn-success" type="button" onClick={Editar2}>
+        <button
+          id="btn-att-cadastro"
+          className="btn btn-success"
+          type="button"
+          onClick={Editar2}>
           Salvar
         </button>
       </form>

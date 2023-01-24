@@ -10,7 +10,9 @@ function Navbar() {
           <Link to="/">Cadastro</Link>
         </li>
         <li className={styles.item}>
-          <Link to="/consulta">Consulta</Link>
+          <Link id="rota-consulta" to="/consulta">
+            Consulta
+          </Link>
         </li>
       </ul>
     </nav>
