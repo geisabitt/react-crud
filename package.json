@@ -16,7 +16,7 @@
     "uuid": "^9.0.0",
     "web-vitals": "^2.1.4"
   },
-  "proxy": "http://localhost:3500/",
+  "proxy": "https://firstapi-production-09ff.up.railway.app",
   "scripts": {
     "start": "react-scripts start --proxy-config proxy.conf.js",
     "build": "react-scripts build",

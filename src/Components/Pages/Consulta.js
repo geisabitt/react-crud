@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Consulta() {
-  // const navigate = useNavigate();
-
   let [cliente, setCliente] = useState([]);
   useEffect(() => {
     fetch("/api/cliente", {
@@ -16,26 +14,6 @@ function Consulta() {
       })
       .catch((error) => console.log("error", error));
   }, []);
-
-  function removePessoa(id) {
-    fetch(`/api/cliente/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((resp) => resp.json())
-      .then((result) => {
-        console.log(result);
-        document.location.reload(true);
-      })
-      .then(console.log("delete Acionado"))
-
-      //  .then((data) => {
-      //  setDeletePessoa(deletePessoa.filter((cliente) => cliente.id !== id));
-      // });
-      .catch((error) => console.log("error", error));
-  }
 
   return (
     <div className="ajust">
@@ -65,29 +43,23 @@ function Consulta() {
                 </td>
                 <td>
                   <Link
-                    class="ver btn btn-outline-primary"
+                    name="btn-ver"
+                    className="ver btn btn-outline-primary"
                     to={"/visualizar/" + cliente._id}>
                     Ver
                   </Link>{" "}
                   <Link
-                    class="editar btn btn-outline-primary"
+                    name="btn-editar"
+                    className="editar btn btn-outline-primary"
                     to={"/editar/" + cliente._id}>
                     Editar
                   </Link>{" "}
-                  <button
-                    class="deletar btn btn-outline-danger"
-                    onClick={() => {
-                      removePessoa(cliente._id);
-                    }}>
-                    Deletar
-                  </button>
                 </td>
               </tr>
             );
           })}
         </tbody>
       </table>
-      <div className="pessoa"></div>
     </div>
   );
 }

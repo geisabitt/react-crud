@@ -18,3 +18,7 @@ h2 {
   padding: 0.7em;
   border-radius: 3;
 }
+.btn_container {
+  display: flex;
+  justify-content: space-around;
+}

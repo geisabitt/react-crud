@@ -7,6 +7,11 @@ function Editar() {
   const [cliente, setCliente] = useState([]);
   const navigate = useNavigate();
 
+  const [status, setStatus] = useState({
+    type: "",
+    mensagem: "",
+  });
+
   const { id } = useParams();
   console.log(id);
   useEffect(() => {
@@ -49,12 +54,88 @@ function Editar() {
     };
 
     fetch(`/api/cliente/${id}`, requestOptions)
-      .then((response) => response.text())
+      .then((response) => response.json())
       .then((result) => {
         console.log(result);
-        navigate("/consulta");
+        if (result.error) {
+          setStatus({
+            type: "erro",
+            mensagem: "Erro ao editar o cliente",
+          });
+          setTimeout(() => {
+            setStatus({
+              type: "",
+              mensagem: "",
+            });
+          }, 3000);
+        } else if (result.message) {
+          setStatus({
+            type: "success",
+            mensagem: "Cliente editado con sucesso",
+          });
+          setTimeout(() => {
+            navigate("/consulta");
+          }, 3000);
+        }
       })
-      .catch((error) => console.log("error", error));
+      .catch(() => {
+        setStatus({
+          type: "erro",
+          mensagem: "Falha no sistema tente mais tarde",
+        });
+        setTimeout(() => {
+          setStatus({
+            type: "",
+            mensagem: "",
+          });
+        }, 3000);
+      });
+  }
+
+  function removePessoa(id) {
+    fetch(`/api/cliente/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((resp) => resp.json())
+      .then((result) => {
+        console.log(result);
+        if (result.error) {
+          setStatus({
+            type: "erro",
+            mensagem: "Erro ao deletar cliente",
+          });
+          setTimeout(() => {
+            setStatus({
+              type: "",
+              mensagem: "",
+            });
+          }, 3000);
+        } else if (result.message) {
+          setStatus({
+            type: "erro",
+            mensagem: "Cliente deletado!",
+          });
+
+          setTimeout(() => {
+            navigate("/consulta");
+          }, 3000);
+        }
+      })
+      .catch(() => {
+        setStatus({
+          type: "erro",
+          mensagem: "Falha no sistema tente mais tarde",
+        });
+        setTimeout(() => {
+          setStatus({
+            type: "",
+            mensagem: "",
+          });
+        }, 3000);
+      });
   }
 
   return (
@@ -171,16 +252,37 @@ function Editar() {
             placeholder="Digite um estado"
           />
         </div>
-        <Link className="btn btn-outline-primary" to={"/consulta"}>
-          Voltar
-        </Link>{" "}
-        <button
-          id="btn-att-cadastro"
-          className="btn btn-success"
-          type="button"
-          onClick={Editar2}>
-          Salvar
-        </button>
+        {status.type === "erro" ? (
+          <p className="alert alert-danger">{status.mensagem}</p>
+        ) : (
+          ""
+        )}
+        {status.type === "success" ? (
+          <p className="alert alert-success">{status.mensagem}</p>
+        ) : (
+          ""
+        )}
+
+        <div className={styles.btn_container}>
+          <Link className="btn btn-outline-primary" to={"/consulta"}>
+            Voltar
+          </Link>
+          <button
+            id="btn-att-cadastro"
+            className="btn btn-success"
+            type="button"
+            onClick={Editar2}>
+            Salvar
+          </button>
+          <button
+            type="button"
+            class="deletar btn btn-outline-danger"
+            onClick={() => {
+              removePessoa(id);
+            }}>
+            Deletar
+          </button>
+        </div>
       </form>
     </div>
   );

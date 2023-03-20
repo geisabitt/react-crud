@@ -1,7 +1,7 @@
 const PROXY_CONFIG = [
   {
     context: ["/"],
-    target: "http://localhost:3500",
+    target: "https://firstapi-production-09ff.up.railway.app",
     secure: false,
     logLevel: "debug",
   },

@@ -6,6 +6,11 @@ import styles from './Cadastro.module.css';
 function Cadastro() {
   const navigate = useNavigate();
 
+  const [status, setStatus] = useState({
+    type: "",
+    mensagem: "",
+  });
+
   const [cliente, setCliente] = useState({
     nome: "",
     sobrenome: "",
@@ -47,10 +52,29 @@ function Cadastro() {
     };
 
     fetch("/api/cliente", requestOptions)
-      .then((response) => response.text())
+      .then((response) => response.json())
       .then((result) => {
         console.log(result);
-        navigate("/consulta");
+        if (result.error) {
+          setStatus({
+            type: "erro",
+            mensagem: "Confira se os dados foram preenchidos de forma correta",
+          });
+          setTimeout(() => {
+            setStatus({
+              type: "",
+              mensagem: "",
+            });
+          }, 3000);
+        } else if (result.message) {
+          setStatus({
+            type: "success",
+            mensagem: "Cliente cadastrado com sucesso",
+          });
+          setTimeout(() => {
+            navigate("/consulta");
+          }, 3000);
+        }
       })
       .catch((error) => console.log("error", error));
   }
@@ -159,6 +183,21 @@ function Cadastro() {
             placeholder="Digite um estado"
           />
         </div>
+
+        {status.type === "erro" ? (
+          <p name="alert-danger" className="alert alert-danger">
+            {status.mensagem}
+          </p>
+        ) : (
+          ""
+        )}
+        {status.type === "success" ? (
+          <p name="alert-success" className="alert alert-success">
+            {status.mensagem}
+          </p>
+        ) : (
+          ""
+        )}
         <button
           id="btn-cadastrar"
           className="btn btn-success"
