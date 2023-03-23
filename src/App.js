@@ -1,11 +1,11 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import Footer from './Components/Footer';
-import Navbar from './Components/Navbar';
-import Cadastro from './Components/Pages/Cadastro';
-import Consulta from './Components/Pages/Consulta';
-import Editar from './Components/Pages/Editar';
-import Visualizar from './Components/Pages/Visualizar';
+import Footer from "./Components/Footer";
+import Navbar from "./Components/Navbar";
+import Cadastro from "./Components/Pages/Cadastro";
+import Consulta from "./Components/Pages/Consulta";
+import Editar from "./Components/Pages/Editar";
+import Visualizar from "./Components/Pages/Visualizar";
 
 function App() {
   return (

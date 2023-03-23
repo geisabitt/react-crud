@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-import styles from './Cadastro.module.css';
+import styles from "./Cadastro.module.css";
 
 function Editar() {
   const [cliente, setCliente] = useState([]);
@@ -29,16 +29,11 @@ function Editar() {
     myHeaders.append("Content-Type", "application/json");
 
     let raw = JSON.stringify({
-      nome: cliente.nome,
-      sobrenome: cliente.sobrenome,
-      data_nascimento: cliente.data_nascimento,
+      name: cliente.name,
+      numbers: cliente.numbers,
+      data_born: cliente.data_born,
       cpf: cliente.cpf,
-      cep: cliente.cep,
-      endereco: cliente.endereco,
-      numero: cliente.numero,
-      complemento: cliente.complemento,
-      cidade: cliente.cidade,
-      estado: cliente.estado,
+      email: cliente.email,
     });
 
     let requestOptions = {
@@ -62,25 +57,25 @@ function Editar() {
       <h2>Editar de cliente</h2>
       <form>
         <div className={styles.form_control}>
-          <label>nome</label>
+          <label>Nome</label>
           <input
             onChange={valorInput}
             type="text"
-            name="nome"
-            id="nome"
+            name="name"
+            id="name"
             placeholder="Digite um nome"
-            value={cliente.nome}
+            value={cliente.name}
           />
         </div>
         <div className={styles.form_control}>
-          <label>sobrenome</label>
+          <label>Telefone</label>
           <input
             onChange={valorInput}
             type="text"
-            name="sobrenome"
-            id="sobrenome"
-            placeholder="Digite um sobrenome"
-            value={cliente.sobrenome}
+            name="numbers"
+            id="numbers"
+            placeholder="Digite um telefone"
+            value={cliente.numbers}
           />
         </div>
         <div className={styles.form_control}>
@@ -95,80 +90,25 @@ function Editar() {
           />
         </div>
         <div className={styles.form_control}>
-          <label>data_nascimento</label>
+          <label>Data de nascimento</label>
           <input
             onChange={valorInput}
             type="date"
-            name="data_nascimento"
-            id="data_nascimento"
-            value={cliente.data_nascimento}
-            placeholder="Digite um data_nascimento"
+            name="data_born"
+            id="data_born"
+            value={cliente.data_born}
+            placeholder="Digite um data de nascimento"
           />
         </div>
         <div className={styles.form_control}>
-          <label>cep</label>
+          <label>E-mail</label>
           <input
             onChange={valorInput}
-            type="number"
-            name="cep"
-            id="cep"
-            value={cliente.cep}
-            placeholder="Digite um cep"
-          />
-        </div>
-        <div className={styles.form_control}>
-          <label>endereco</label>
-          <input
-            onChange={valorInput}
-            type="text"
-            name="endereco"
-            id="endereco"
-            value={cliente.endereco}
-            placeholder="Digite um endereco"
-          />
-        </div>
-        <div className={styles.form_control}>
-          <label>numero</label>
-          <input
-            onChange={valorInput}
-            type="text"
-            name="numero"
-            id="numero"
-            value={cliente.numero}
-            placeholder="Digite um numero"
-          />
-        </div>
-        <div className={styles.form_control}>
-          <label>complemento</label>
-          <input
-            onChange={valorInput}
-            type="text"
-            name="complemento"
-            id="complemento"
-            value={cliente.complemento}
-            placeholder="Digite um complemento"
-          />
-        </div>
-        <div className={styles.form_control}>
-          <label>cidade</label>
-          <input
-            onChange={valorInput}
-            type="text"
-            name="cidade"
-            id="cidade"
-            value={cliente.cidade}
-            placeholder="Digite um cidade"
-          />
-        </div>
-        <div className={styles.form_control}>
-          <label>estado</label>
-          <input
-            onChange={valorInput}
-            type="text"
-            name="estado"
-            id="estado"
-            value={cliente.estado}
-            placeholder="Digite um estado"
+            type="email"
+            name="email"
+            id="email"
+            value={cliente.email}
+            placeholder="Digite um email"
           />
         </div>
         <Link className="btn btn-outline-primary" to={"/consulta"}>

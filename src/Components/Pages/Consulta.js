@@ -43,10 +43,11 @@ function Consulta() {
       <table className="table table-striped">
         <thead>
           <tr>
-            <td scope="col">Nome</td>
+          <td scope="col">Nome</td>
+            <td scope="col">Telefone</td>
             <td scope="col">Data de Nascimento</td>
             <td scope="col">CPF</td>
-            <td scope="col">Endereco</td>
+            <td scope="col">Email</td>
             <td scope="col">Ações</td>
           </tr>
         </thead>
@@ -55,13 +56,13 @@ function Consulta() {
             return (
               <tr scope="row" key={cliente._id}>
                 <td>
-                  {cliente.nome} {cliente.sobrenome}
+                  {cliente.name}
                 </td>
-                <td>{cliente.data_nascimento}</td>
+                <td>{cliente.numbers}</td>
+                <td>{cliente.data_born}</td>
                 <td>{cliente.cpf}</td>
                 <td>
-                  {cliente.endereco},{cliente.numero},{cliente.complemento} -{" "}
-                  {cliente.cidade}/{cliente.estado} -{cliente.cep}{" "}
+                  {cliente.email}
                 </td>
                 <td>
                   <Link

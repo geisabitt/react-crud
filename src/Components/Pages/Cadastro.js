@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import styles from './Cadastro.module.css';
+import styles from "./Cadastro.module.css";
 
 function Cadastro() {
   const navigate = useNavigate();
@@ -27,16 +27,11 @@ function Cadastro() {
     myHeaders.append("Content-Type", "application/json");
 
     let raw = JSON.stringify({
-      nome: cliente.nome,
-      sobrenome: cliente.sobrenome,
-      data_nascimento: cliente.data_nascimento,
+      name: cliente.name,
+      numbers: cliente.numbers,
+      email: cliente.email,
       cpf: cliente.cpf,
-      cep: cliente.cep,
-      endereco: cliente.endereco,
-      numero: cliente.numero,
-      complemento: cliente.complemento,
-      cidade: cliente.cidade,
-      estado: cliente.estado,
+      data_born: cliente.data_born,
     });
 
     let requestOptions = {
@@ -60,103 +55,53 @@ function Cadastro() {
       <h2>Cadastro de clientes</h2>
       <form>
         <div className={styles.form_control}>
-          <label>nome</label>
+          <label>Nome</label>
           <input
             onChange={valorInput}
             type="text"
-            name="nome"
-            id="nome"
+            name="name"
+            id="name"
             placeholder="Digite um nome"
           />
         </div>
         <div className={styles.form_control}>
-          <label>sobrenome</label>
+          <label>Telefone</label>
           <input
             onChange={valorInput}
             type="text"
-            name="sobrenome"
-            id="sobrenome"
-            placeholder="Digite um sobrenome"
+            name="numbers"
+            id="numbers"
+            placeholder="Digite um telefone"
           />
         </div>
         <div className={styles.form_control}>
-          <label>cpf</label>
+          <label>CPF</label>
           <input
             onChange={valorInput}
-            type="number"
+            type="string"
             name="cpf"
             id="cpf"
             placeholder="Digite um cpf"
           />
         </div>
         <div className={styles.form_control}>
-          <label>data_nascimento</label>
+          <label>Data Nascimento</label>
           <input
             onChange={valorInput}
             type="date"
-            name="data_nascimento"
-            id="data_nascimento"
-            placeholder="Digite um data_nascimento"
+            name="date_born"
+            id="date_born"
+            placeholder="Digite um Data Nascimento"
           />
         </div>
         <div className={styles.form_control}>
-          <label>cep</label>
+          <label>E-mail</label>
           <input
             onChange={valorInput}
-            type="number"
-            name="cep"
-            id="cep"
-            placeholder="Digite um cep"
-          />
-        </div>
-        <div className={styles.form_control}>
-          <label>endereco</label>
-          <input
-            onChange={valorInput}
-            type="text"
-            name="endereco"
-            id="endereco"
-            placeholder="Digite um endereco"
-          />
-        </div>
-        <div className={styles.form_control}>
-          <label>numero</label>
-          <input
-            onChange={valorInput}
-            type="text"
-            name="numero"
-            id="numero"
-            placeholder="Digite um numero"
-          />
-        </div>
-        <div className={styles.form_control}>
-          <label>complemento</label>
-          <input
-            onChange={valorInput}
-            type="text"
-            name="complemento"
-            id="complemento"
-            placeholder="Digite um complemento"
-          />
-        </div>
-        <div className={styles.form_control}>
-          <label>cidade</label>
-          <input
-            onChange={valorInput}
-            type="text"
-            name="cidade"
-            id="cidade"
-            placeholder="Digite um cidade"
-          />
-        </div>
-        <div className={styles.form_control}>
-          <label>estado</label>
-          <input
-            onChange={valorInput}
-            type="text"
-            name="estado"
-            id="estado"
-            placeholder="Digite um estado"
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Digite um e-mail"
           />
         </div>
         <button

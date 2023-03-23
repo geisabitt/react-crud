@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 
 function Visualizar() {
   const [cliente, setCliente] = useState([]);
@@ -35,11 +35,11 @@ function Visualizar() {
           </tr>
           <tr>
             <th scope="row">Nome: </th>
-            <td>{cliente.nome}</td>
+            <td>{cliente.name}</td>
           </tr>
           <tr>
-            <th scope="row">Sobrenome: </th>
-            <td>{cliente.sobrenome}</td>
+            <th scope="row">Telefone: </th>
+            <td>{cliente.numbers}</td>
           </tr>
           <tr>
             <th scope="row">CPF: </th>
@@ -47,27 +47,11 @@ function Visualizar() {
           </tr>
           <tr>
             <th scope="row">Data Nascimento: </th>
-            <td>{cliente.data_nascimento}</td>
+            <td>{cliente.data_born}</td>
           </tr>
           <tr>
-            <th scope="row">Cep: </th>
-            <td>{cliente.cep}</td>
-          </tr>
-          <tr>
-            <th scope="row">Endereco: </th>
-            <td>{cliente.endereco}</td>
-          </tr>
-          <tr>
-            <th scope="row">Complemento: </th>
-            <td>{cliente.complemento}</td>
-          </tr>
-          <tr>
-            <th scope="row">Cidade: </th>
-            <td>{cliente.cidade}</td>
-          </tr>
-          <tr>
-            <th scope="row">Estado: </th>
-            <td>{cliente.estado}</td>
+            <th scope="row">E-mail: </th>
+            <td>{cliente.email}</td>
           </tr>
           <tr>
             <th scope="row"></th>
