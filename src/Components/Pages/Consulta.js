@@ -1,40 +1,27 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 
 function Consulta() {
-  // const navigate = useNavigate();
+  const [clientes, setClientes] = useState([]);
 
-  let [cliente, setCliente] = useState([]);
   useEffect(() => {
-    fetch("/api/cliente", {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((cliente) => {
-        console.log(cliente);
-        setCliente(cliente);
-      })
-      .catch((error) => console.log("error", error));
+    const clientesLocalStorage = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      const clienteJSON = localStorage.getItem(key);
+      if (clienteJSON) {
+        const cliente = JSON.parse(clienteJSON);
+        cliente.id = key; // Adiciona o ID do cliente
+        clientesLocalStorage.push(cliente);
+      }
+    }
+    setClientes(clientesLocalStorage);
   }, []);
 
   function removePessoa(id) {
-    fetch(`/api/cliente/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((resp) => resp.json())
-      .then((result) => {
-        console.log(result);
-        document.location.reload(true);
-      })
-      .then(console.log("delete Acionado"))
-
-      //  .then((data) => {
-      //  setDeletePessoa(deletePessoa.filter((cliente) => cliente.id !== id));
-      // });
-      .catch((error) => console.log("error", error));
+    localStorage.removeItem(id);
+    const updatedClientes = clientes.filter((cliente) => cliente.id !== id);
+    setClientes(updatedClientes);
   }
 
   return (
@@ -43,53 +30,42 @@ function Consulta() {
       <table className="table table-striped">
         <thead>
           <tr>
-          <td scope="col">Nome</td>
-            <td scope="col">Telefone</td>
-            <td scope="col">Data de Nascimento</td>
-            <td scope="col">CPF</td>
-            <td scope="col">Email</td>
-            <td scope="col">Ações</td>
+            <th scope="col">Nome</th>
+            <th scope="col">Telefone</th>
+            <th scope="col">Data de Nascimento</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Email</th>
+            <th scope="col">Ações</th>
           </tr>
         </thead>
         <tbody>
-          {Object.values(cliente).map((cliente) => {
-            return (
-              <tr scope="row" key={cliente._id}>
-                <td>
-                  {cliente.name}
-                </td>
-                <td>{cliente.numbers}</td>
-                <td>{cliente.data_born}</td>
-                <td>{cliente.cpf}</td>
-                <td>
-                  {cliente.email}
-                </td>
-                <td>
-                  <Link
-                    class="ver btn btn-outline-primary"
-                    to={"/visualizar/" + cliente._id}>
-                    Ver
-                  </Link>{" "}
-                  <Link
-                    class="editar btn btn-outline-primary"
-                    to={"/editar/" + cliente._id}>
-                    Editar
-                  </Link>{" "}
-                  <button
-                    class="deletar btn btn-outline-danger"
-                    onClick={() => {
-                      removePessoa(cliente._id);
-                    }}>
-                    Deletar
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
+          {clientes.map((cliente) => (
+            <tr key={cliente.id}>
+              <td>{cliente.name}</td>
+              <td>{cliente.numbers}</td>
+              <td>{cliente.date_born}</td>
+              <td>{cliente.cpf}</td>
+              <td>{cliente.email}</td>
+              <td>
+                <Link className="editar btn btn-outline-primary" to={`/form/${cliente.id}`}>
+                  Editar
+                </Link>{" "}
+                <button
+                  className="deletar btn btn-outline-danger"
+                  onClick={() => {
+                    removePessoa(cliente.id);
+                  }}
+                >
+                  Deletar
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
       <div className="pessoa"></div>
     </div>
   );
 }
+
 export default Consulta;

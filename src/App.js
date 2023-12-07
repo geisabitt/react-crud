@@ -1,21 +1,18 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
-import Cadastro from "./Components/Pages/Cadastro";
 import Consulta from "./Components/Pages/Consulta";
-import Editar from "./Components/Pages/Editar";
-import Visualizar from "./Components/Pages/Visualizar";
+import Form from "./Components/Pages/Form";
 
 function App() {
   return (
     <Router>
       <Navbar></Navbar>
       <Routes>
-        <Route path="/" element={<Cadastro />} />
+        <Route path="/" element={<Form />} />
         <Route path="/consulta" element={<Consulta />} />
-        <Route path="/visualizar/:id" element={<Visualizar />} />
-        <Route path="/editar/:id" element={<Editar />} />
+        <Route path="/form/:id" element={<Form />} />
       </Routes>
       <Footer></Footer>
     </Router>
